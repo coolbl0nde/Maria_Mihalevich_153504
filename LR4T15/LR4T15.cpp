@@ -3,7 +3,7 @@
 
 int main() {
 
-    int size, k = 1, a;
+    int size, k = 1, a, b = 0, c = 0;
 
     std::cout << "Enter a: ";
     std::cin >> a;
@@ -16,16 +16,30 @@ int main() {
         arr[i] = new int[size];
     }
 
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            arr[i][j] = k;
-            do {
-                if () {
+    arr[0][0] = k;
 
-                }
-            }while(arr[i][j] != a)
+    if (k != a) {
+        c++;
+        k++;
+        while (k != a) {
+            if (b < c) {
+              arr[b][c] = k;
+              b++;
+            }else if (b >= c && c != 0) {
+              arr[b][c] = k;
+              c--;
+            }else if (c == 0) {
+              arr[b][c] = k;
+              c = b + 1;
+              b = 0;
+            }
+            k++;
         }
     }
+
+
+
+    std::cout << b << " " << c;
 
     for (int i = 0; i < size; i++) {
         delete[] arr[i];
