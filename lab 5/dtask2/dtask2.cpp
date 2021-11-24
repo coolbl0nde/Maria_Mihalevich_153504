@@ -1,4 +1,4 @@
-﻿#include <iostream>
+﻿/*#include <iostream>
 #include <cmath>
 
 int f(int, int, int);
@@ -40,4 +40,4 @@ int main(){
 	x = x % m;
 
 	std::cout << "x = " << x;
-}
+}*/

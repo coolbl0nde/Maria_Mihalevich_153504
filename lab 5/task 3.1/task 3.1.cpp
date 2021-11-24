@@ -43,7 +43,7 @@ int main(){
 
     setlocale(LC_ALL, "ru");
 
-    int n, m, k = 0, p = 1;
+    int n, m, k = 0;
 
     std::cout << "Введите кол-во строк: ";
     n = input();
@@ -74,7 +74,6 @@ int main(){
             std::cout << arr[i][j] << " ";
             if (i == j && arr[i][j] % 2 == 0) {
                 arr1[z] = arr[i][j];
-                //p *= arr1[z];
                 z++;
             }
         }

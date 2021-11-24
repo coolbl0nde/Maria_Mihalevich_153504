@@ -20,25 +20,6 @@ int inputValue() {
     }
 }
 
-int inputArray() {
-    while (true) {
-        double value;
-
-        std::cin >> value;
-
-        if (std::cin.fail()) {
-            std::cin.clear();
-            std::cin.ignore(32767, '\n');
-            std::cout << "Oшибка. Введите ещё раз: \n";
-        }
-        else {
-            std::cin.ignore(32767, '\n');
-
-            return value;
-        }
-    }
-}
-
 void outputArray(int** arr, int n) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {

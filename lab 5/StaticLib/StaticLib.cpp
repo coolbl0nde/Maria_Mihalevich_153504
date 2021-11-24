@@ -7,7 +7,7 @@ int product(int* arr, int b) {
 	}
 	return s;
 }
-void sum(int* arr, int b) {
+void outputArray(int* arr, int b) {
 	for (int i = 0; i < b; i++) {
 		std::cout << arr[i];
 	}

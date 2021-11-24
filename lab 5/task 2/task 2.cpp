@@ -12,7 +12,7 @@ int main()
     }
 
     std::cout << product(arr, b);
-    sum(arr, b);
+    outputArray(arr, b);
 
     delete arr;
 }
