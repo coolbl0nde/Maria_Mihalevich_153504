@@ -3,7 +3,7 @@
 
 int input() {
     while (true) {
-        int value;
+        unsigned long long int value;
 
         std::cin >> value;
 
@@ -20,39 +20,34 @@ int input() {
     }
 }
 
-int modExp(int k, int n, int m) {
-    if (n == 0) {
-        return 1;
-    }
-    else if (n % 2 == 1) {
-        return (k * modExp(k, n - 1, m)) % m;
-    }
+unsigned long long int F(unsigned long long int x, unsigned long long int y, unsigned long long int z) {
 
-    int a = modExp(k, n / 2, m);
-
-    return (a * a) % m;
+    if (y == 0) return 1;
+    else if (y % 2)return x * F(x * x % z, y / 2, z) % z;
+    else return F(x * x % z, y / 2, z);
 }
 
 int main() {
 
-	int k, n, t, m, f, N = 1;
+    unsigned long long int k, n, t, m, f, N = 1, l;
 
 	std::cout << "Enter k, n, t: ";
     k = input();
     n = input();
     t = input();
-
     m = pow(10, t);
-
+    l = k % m;
     int* arr = new int[1];
 
     while (k != 0 && n != 0) {
         if (N != 1) arr = (int*)realloc(arr, N * sizeof(int));
-        arr[N - 1] = modExp(k, n, m);
+        arr[N - 1] = F(l, n, m);
         N++;
         k = input();
         n = input();
         t = input();
+        m = pow(10, t);
+        l = k % m;
     }
 
     for (int i = 0; i < N - 1; i++) {
