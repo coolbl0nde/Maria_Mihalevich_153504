@@ -1,43 +1,65 @@
-﻿/*#include <iostream>
+﻿#include <iostream>
 #include <cmath>
 
-int f(int, int, int);
-int fk(int, int, int);
+int input() {
+    while (true) {
+        int value;
 
-int f(int n, int i, int k) {
-	if (n == 0 && i == 0) {
-		return 1;
-	}
-	if (n > 0 && 0 <= i < n*(k - 1) + 1) {
-		return fk(n, i, k);
-	}
-	else {
-		return 0;
-	}
+        std::cin >> value;
+
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(32767, '\n');
+            std::cout << "Error. Enter again:  \n";
+        }
+        else {
+            std::cin.ignore(32767, '\n');
+
+            return value;
+        }
+    }
 }
 
+int modExp(int k, int n, int m) {
+    if (n == 0) {
+        return 1;
+    }
+    else if (n % 2 == 1) {
+        return (k * modExp(k, n - 1, m)) % m;
+    }
 
-int fk(int n, int r, int k) {
-	int sum = 0;
+    int a = modExp(k, n / 2, m);
 
-	for (int i = 0; i <= k - 1; ++i) {
-		sum += f(n - 1, r - i, k);
-	}
-
-	return sum;
+    return (a * a) % m;
 }
 
-int main(){
-	int k, n, t, m, x = 0;
-	std::cin >> k >> n >> t;
+int main() {
 
-	m = pow(10, t);
+	int k, n, t, m, f, N = 1;
 
-	for (int i = 0; i < n * (k - 1); i++) {
-		x += f(n, i, k);
-	}
+	std::cout << "Enter k, n, t: ";
+    k = input();
+    n = input();
+    t = input();
 
-	x = x % m;
+    m = pow(10, t);
 
-	std::cout << "x = " << x;
-}*/
+    int* arr = new int[1];
+
+    while (k != 0 && n != 0) {
+        if (N != 1) arr = (int*)realloc(arr, N * sizeof(int));
+        arr[N - 1] = modExp(k, n, m);
+        N++;
+        k = input();
+        n = input();
+        t = input();
+    }
+
+    for (int i = 0; i < N - 1; i++) {
+        std::cout << std::endl << arr[i];
+    }
+
+    delete arr;
+
+    return 0;
+}

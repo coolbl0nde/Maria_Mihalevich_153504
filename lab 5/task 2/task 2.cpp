@@ -1,5 +1,4 @@
 ﻿#include <iostream>
-#include "..\StaticLib\Header.h";
 
 int main()
 {
@@ -10,9 +9,6 @@ int main()
         arr[i] = i;
         std::cout << arr[i] << " ";
     }
-
-    std::cout << product(arr, b);
-    outputArray(arr, b);
 
     delete arr;
 }
