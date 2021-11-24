@@ -121,7 +121,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>#include "..\StaticLib\Header.h";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>..\debug\StaticLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,6 +142,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="task 3.1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StaticLib\StaticLib.vcxproj">
+      <Project>{ac855571-1f40-4416-8b06-bb227ab88caf}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

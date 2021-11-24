@@ -1,5 +1,5 @@
-﻿#include <iostream>
-#include "..\StaticLib\Header.h";
+﻿#include "..\StaticLib\Header.h";
+#include <iostream>
 
 int input() {
     while (true) {
@@ -39,7 +39,7 @@ int inputArray() {
     }
 }
 
-int main(){
+int main() {
 
     setlocale(LC_ALL, "ru");
 
@@ -67,7 +67,7 @@ int main(){
         }
     }
 
-    int* arr1 = new int [k];
+    int* arr1 = new int[k];
 
     for (int i = 0, z = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
@@ -81,7 +81,9 @@ int main(){
     }
 
     std::cout << "\n массив из элементов, расположенных на главной диагонали матрицы и имеющих четное значение:\n";
-    outputArray(arr1, k);
+    for (int i = 0; i < k; i++) {
+        std::cout << arr1[i] << " ";
+    }
 
     std::cout << "\n произведение массива: " << product(arr1, k);
 

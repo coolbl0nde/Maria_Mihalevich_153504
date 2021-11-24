@@ -9,6 +9,6 @@ int product(int* arr, int b) {
 }
 void outputArray(int* arr, int b) {
 	for (int i = 0; i < b; i++) {
-		std::cout << arr[i];
+		std::cout << arr[i] << " ";
 	}
 }
