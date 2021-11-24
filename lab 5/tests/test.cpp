@@ -1,10 +1,3 @@
-/*#include "pch.h"
-
-TEST(TestCaseName, TestName) {
-  EXPECT_EQ(1, 1);
-  EXPECT_TRUE(true);
-}*/
-
 #include "pch.h"
 
 unsigned long long int F(unsigned long long int x, unsigned long long int y, unsigned long long int z) {
