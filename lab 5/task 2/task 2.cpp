@@ -1,5 +1,30 @@
-﻿#include <iostream>
+﻿//Лабораторная 5, задача 2. Выполнена: Михалевич М.П.
+/*Для заданного одномерного массива A из N элементов проверить, что существует по 
+крайней мере один элемент Ai, для которого выполняется условие Ai ≤ i
+2. Рекурсивную функцию применять каждый раз отдельно для каждой из половин массива. 
+Рекурсивные вызовы заканчивать, когда останется только один элемент */
+
+#include <iostream>
 #include <Windows.h>
+
+int input() {
+	while (true) {
+		int value;
+
+		std::cin >> value;
+
+		if (std::cin.fail() || value < 1) {
+			std::cin.clear();
+			std::cin.ignore(32767, '\n');
+			std::cout << "Oшибка. Введите ещё раз: \n";
+		}
+		else {
+			std::cin.ignore(32767, '\n');
+
+			return value;
+		}
+	}
+}
 
 int main() {
 	HINSTANCE load;
@@ -14,7 +39,7 @@ int main() {
 	int n;
 
 	std::cout << "Введите размер массива: ";
-	std::cin >> n;
+	n = input();
 
 	int* A = new int[n];
 
