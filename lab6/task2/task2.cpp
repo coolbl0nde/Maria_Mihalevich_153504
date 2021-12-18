@@ -5,6 +5,8 @@ char* strIn() {
     char* str = new char[1];
     int len = 0;
 
+    std::cout << "Enter line: ";
+
     while (std::cin.peek() != '\n') {
         *(str + len) = std::getchar();
 
@@ -182,5 +184,5 @@ char* f(char* str) {
 int main() {
     char* str = strIn();
 
-    std::cout << '\n' << f(str);
+    std::cout << "\n New line: " << f(str);
 }

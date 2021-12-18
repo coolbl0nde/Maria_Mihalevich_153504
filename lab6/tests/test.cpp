@@ -128,6 +128,143 @@ int f5(int L, int m, std::string s1, std::string s2) {
 	return amount % m;
 }
 
+std::string process(std::string str) {
+	int count = 0;
+
+	while (count < str.length()) {
+		if (str[count] == 'c' && count + 1 < str.length() && (tolower(str[count + 1]) == 'e' || tolower(str[count + 1]) == 'i' || tolower(str[count + 1]) == 'y')) {
+			str[count] = 's';
+
+			continue;
+		}
+		else if (str[count] == 'C' && count + 1 < str.length() && (tolower(str[count + 1]) == 'e' || tolower(str[count + 1]) == 'i' || tolower(str[count + 1]) == 'y')) {
+			str[count] = 'S';
+
+			continue;
+		}
+		else if (str[count] == 'q' && count + 1 < str.length() && tolower(str[count + 1]) == 'u') {
+			str[count] = 'k';
+			str[count + 1] = 'v';
+
+			continue;
+		}
+		else if (str[count] == 'Q' && count + 1 < str.length() && tolower(str[count + 1]) == 'u') {
+			str[count] = 'K';
+			str[count + 1] = 'v';
+
+			continue;
+		}
+		else if (str[count] == 'c' || str[count] == 'q') {
+			str[count] = 'k';
+
+			continue;
+		}
+		else if (str[count] == 'C' || str[count] == 'Q') {
+			str[count] = 'K';
+
+			continue;
+		}
+		else if (str[count] == 'x') {
+			str[count] = 'k';
+			str.insert(count + 1, "s");
+
+			continue;
+		}
+		else if (str[count] == 'X') {
+			str[count] = 'K';
+			str.insert(count + 1, "s");
+
+			continue;
+		}
+		else if (str[count] == 'w') {
+			str[count] = 'v';
+
+			continue;
+		}
+		else if (str[count] == 'W') {
+			str[count] = 'V';
+
+			continue;
+		}
+		else if (str[count] == 'p' && count + 1 < str.length() && tolower(str[count + 1]) == 'h') {
+			str[count] = 'f';
+			str.erase(count + 1, 1);
+
+			continue;
+		}
+		else if (str[count] == 'P' && count + 1 < str.length() && tolower(str[count + 1]) == 'h') {
+			str[count] = 'F';
+			str.erase(count + 1, 1);
+
+			continue;
+		}
+		else if (str[count] == 'y' && count + 2 < str.length() && tolower(str[count + 1]) == 'o' && tolower(str[count + 2]) == 'u') {
+			str[count] = 'u';
+			str.erase(count + 1, 2);
+
+			continue;
+		}
+		else if (str[count] == 'Y' && count + 2 < str.length() && tolower(str[count + 1]) == 'o' && tolower(str[count + 2]) == 'u') {
+			str[count] = 'U';
+			str.erase(count + 1, 2);
+
+			continue;
+		}
+		else if (str[count] == 'o' && count + 1 < str.length() && tolower(str[count + 1]) == 'o') {
+			str[count] = 'u';
+			str.erase(count + 1, 1);
+
+			continue;
+		}
+		else if (str[count] == 'O' && count + 1 < str.length() && tolower(str[count + 1]) == 'o') {
+			str[count] = 'U';
+			str.erase(count + 1, 1);
+
+			continue;
+		}
+		else if (str[count] == 'e' && count + 1 < str.length() && tolower(str[count + 1]) == 'e') {
+			str[count] = 'i';
+			str.erase(count + 1, 1);
+
+			continue;
+		}
+		else if (str[count] == 'E' && count + 1 < str.length() && tolower(str[count + 1]) == 'e') {
+			str[count] = 'I';
+			str.erase(count + 1, 1);
+
+			continue;
+		}
+		else if (str[count] == 't' && count + 1 < str.length() && tolower(str[count + 1]) == 'h') {
+			str[count] = 'z';
+			str.erase(count + 1, 1);
+
+			continue;
+		}
+		else if (str[count] == 'T' && count + 1 < str.length() && tolower(str[count + 1]) == 'h') {
+			str[count] = 'Z';
+			str.erase(count + 1, 1);
+
+			continue;
+		}
+		else if (count + 1 < str.length() && tolower(str[count]) == tolower(str[count + 1]) && tolower(str[count]) != 'a' && tolower(str[count]) != 'e' && tolower(str[count]) != 'i' && tolower(str[count]) != 'o' && tolower(str[count]) != 'u' && tolower(str[count]) != 'y') {
+			str.erase(count + 1, 1);
+
+			continue;
+		}
+
+		++count;
+	}
+
+	return str;
+}
+
+//task4
+TEST(test2_process, task4) {
+
+	EXPECT_EQ("Tu strong for ung Prinse Josef to folov.", process("Too strong for young Prince Joseph to follow."));
+	EXPECT_TRUE(true);
+}
+
 //task5
 TEST(test1, task5) {
 	std::string s1 = "cup", s2 = "russia";

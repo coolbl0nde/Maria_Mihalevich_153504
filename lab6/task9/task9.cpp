@@ -22,7 +22,7 @@ int main() {
         minus = false;
 
         if (isdigit(str[count])) {
-            if (str[count - 1] == '-') {
+            if (count > 0 && str[count - 1] == '-') {
                 buff = str[count] - '0';
                 minus = true;
             }
@@ -80,8 +80,6 @@ int main() {
             if (minus) {
                 buff *= -1;
             }
-
-            std::cout << '\n' << buff;
 
             sum += buff;
         }

@@ -1,4 +1,6 @@
-﻿#include<iostream>
+﻿//Лабораторная 6, задача 5. Выполнила Михалевич М.П.
+
+#include<iostream>
 #include<string>
 
 using namespace std;
