@@ -24,7 +24,7 @@ int main() {
 
 	a = toTen(str, length);
 
-	std::cout << std::endl << std::fixed << toTernary(a) << std::endl;
+	std::cout << std::endl << std::fixed << toTernary(a) << std::endl << a;
 
 	free(str);
 	return 0;

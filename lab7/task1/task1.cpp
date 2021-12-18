@@ -14,6 +14,7 @@ double toTernary(double);
 
 int main() {
     double k = toDecimal();
+    std::cout << k << std::endl;
     std::cout << std::fixed << '\n' << toTernary(k);
 }
 
