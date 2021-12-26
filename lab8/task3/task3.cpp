@@ -18,13 +18,10 @@
 #include <fstream>
 #include <Windows.h>
 #pragma warning(disable : 4996)
-using namespace std;
-
-
 
 void clear_m() {
-	cin.clear();
-	cin.ignore(9999, '\n');
+	std::cin.clear();
+	std::cin.ignore(9999, '\n');
 }
 void error(int a) {
 	clear_m();
@@ -32,7 +29,7 @@ void error(int a) {
 	scanf("%d", &a);
 
 }
-class Cex {
+class factory {
 private:
 	char name[100];
 	int amount;
@@ -40,29 +37,29 @@ private:
 	int amount_min;
 	int amount_max;
 public:
-	void cout_sss(Cex* ceh, int m) {
-		ofstream file;
+	void cout_sss(factory* ceh, int m) {
+		std::ofstream file;
 		file.open("txt.txt");
 		file.is_open();
 		for (int y = 0; y < m; y++)
 			file << ceh[y].name << " , " << ceh[y].amount << " шт.;" << ceh[y].number << '\n';
 		file.close();
 	}
-	void max_s(Cex*& ceh, int m) {
+	void max_s(factory*& ceh, int m) {
 		int buf = ceh[0].amount;
 		for (int a = 0; a < m; a++)
 			if (buf < ceh[a].amount)
 				buf = ceh[a].amount;
 		for (int a = 0; a < m; a++) ceh[a].amount_max = buf;
 	}
-	void min_s(Cex*& ceh, int m) {
+	void min_s(factory*& ceh, int m) {
 		int buf = ceh[0].amount;
 		for (int a = 0; a < m; a++)
 			if (buf > ceh[a].amount)
 				buf = ceh[a].amount;
 		for (int a = 0; a < m; a++) ceh[a].amount_min = buf;
 	}
-	void cout_s(Cex* ceh, int m) {
+	void cout_s(factory* ceh, int m) {
 		min_s(ceh, m);
 		max_s(ceh, m);
 		printf("\n");
@@ -70,8 +67,8 @@ public:
 			printf("%s, %d шт.; Цех %d\n", ceh[y].name, ceh[y].amount, ceh[y].number);
 		cout_sss(ceh, m);
 	}
-	void shekerSort(Cex* mass, int count) {
-		Cex t;
+	void shekerSort(factory* mass, int count) {
+		factory t;
 		int left = 0, right = count - 1;
 		int flag = 1;
 		while ((left < right) && flag > 0)
@@ -102,14 +99,14 @@ public:
 		}
 		cout_s(mass, count);
 	}
-	void cin_s(Cex* ceh, int zero, int m) {
+	void cin_s(factory* ceh, int zero, int m) {
 		bool k;
 		int p;
 		for (int y = zero; y < m + zero;) {
 			clear_m();
-			printf("\nКоличество продукций, который выпускает цех: ");
+			printf("Введите количество продукций, который выпускает цех: ");
 			scanf("%d", &p);
-			while (cin.fail() || p<1 || p>m) {
+			while (std::cin.fail() || p<1 || p>m) {
 				clear_m();
 				printf("Введите корректное значение: ");
 				scanf("%d", &p);
@@ -117,17 +114,17 @@ public:
 			for (int x = 0; x < p; x++, y++) {
 				clear_m();
 				printf("\nНаименование изделия (100 символов): ");
-				cin.get(ceh[y].name, 100);
+				std::cin.get(ceh[y].name, 100);
 				while (ceh[y].name[0] == '\0') {
 					clear_m();
 					printf("Введите корректное значение: ");
-					cin.get(ceh[y].name, 100);
+					std::cin.get(ceh[y].name, 100);
 				}
 				clear_m();
 				printf("Количество: ");
 				scanf("%d", &ceh[y].amount);
 
-				while (cin.fail() || ceh[y].amount < 1) {
+				while (std::cin.fail() || ceh[y].amount < 1) {
 					clear_m();
 					printf("Введите корректное значение: ");
 					scanf("%d", &ceh[y].amount);
@@ -146,7 +143,7 @@ public:
 						break;
 					}
 				}
-				while (cin.fail() || ceh[y].number < 1 || k) {
+				while (std::cin.fail() || ceh[y].number < 1 || k) {
 					clear_m();
 					printf("Введите корректное значение: ");
 					scanf("%d", &ceh[y].number);
@@ -162,22 +159,22 @@ public:
 		}
 		cout_s(ceh, m);
 	}
-	void dop(Cex*& ceh, int& m) {
+	void dop(factory*& ceh, int& m) {
 		int y = m;
 		printf("Сколько продукции добавить (0=назад): ");
 		scanf("%d", &y);
-		while (cin.fail() || y < 0) {
+		while (std::cin.fail() || y < 0) {
 			clear_m();
 			printf("\nВведите корректное значение (0=назад): ");
 			scanf("%d", &y);
 		}
 		if (y == 0) return;
-		Cex* buf = new Cex[m];
+		factory* buf = new factory[m];
 		for (int u = 0; u < m; u++) {
 			buf[u] = ceh[u];
 		}
 		delete[] ceh;
-		ceh = new Cex[m + y];
+		ceh = new factory[m + y];
 		for (int u = 0; u < m; u++) {
 			ceh[u] = buf[u];
 		}
@@ -185,17 +182,17 @@ public:
 		cin_s(ceh, m, y);
 		m += y;
 	}
-	void delete_s(Cex*& ceh, int& m) {
+	void delete_s(factory*& ceh, int& m) {
 		int d;
 		char da[100];
 		bool r = 0;
 		clear_m();
 		printf("\nНаименование продукции для удаления (0=назад): ");
-		cin.get(da, 100);
+		std::cin.get(da, 100);
 		while (da[0] == '\0') {
 			clear_m();
 			printf("Введите корректное значение: ");
-			cin.get(da, 100);
+			std::cin.get(da, 100);
 		}
 		if (da[0] == '0' && da[1] == '\0') {
 			return;
@@ -222,29 +219,29 @@ public:
 		}
 		for (int u = d; u < m - 1; u++)
 			ceh[u] = ceh[u + 1];
-		Cex* buf = new Cex[--m];
+		factory* buf = new factory[--m];
 		for (int u = 0; u < m; u++) {
 			buf[u] = ceh[u];
 		}
 		delete[] ceh;
-		ceh = new Cex[m];
+		ceh = new factory[m];
 		for (int u = 0; u < m; u++) {
 			ceh[u] = buf[u];
 		}
 		delete[] buf;
 		cout_s(ceh, m);
 	}
-	void detail(Cex* ceh1, int m) {
-		Cex* ceh = new Cex[m];
+	void detail(factory* ceh1, int m) {
+		factory* factory1 = new factory[m];
 		for (int u = 0; u < m; u++) {
-			ceh[u] = ceh1[u];
+			factory1[u] = ceh1[u];
 		}
 		int d, da;
 		bool r = 0;
 		clear_m();
 		printf("\nЦех (0=назад): ");
 		scanf("%d", &da);
-		while (cin.fail() || da < 0) {
+		while (std::cin.fail() || da < 0) {
 			clear_m();
 			printf("Введите корректное значение: ");
 			scanf("%d", &da);
@@ -252,7 +249,7 @@ public:
 		if (!da) return;
 		int h;
 		for (h = 0; h < m; h++) {
-			if (ceh[h].number == da) {
+			if (factory1[h].number == da) {
 				r = 1;
 				d = h;
 				break;
@@ -265,38 +262,38 @@ public:
 		double k = 0;
 		for (;;) {
 			r = 0;
-			k += ceh[d].amount;
+			k += factory1[d].amount;
 			for (int u = d; u < m - 1; u++)
-				ceh[u] = ceh[u + 1];
-			Cex* buf = new Cex[--m];
+				factory1[u] = factory1[u + 1];
+			factory* buf = new factory[--m];
 			for (int u = 0; u < m; u++) {
-				buf[u] = ceh[u];
+				buf[u] = factory1[u];
 			}
-			delete[] ceh;
-			ceh = new Cex[m];
+			delete[] factory1;
+			factory1 = new factory[m];
 			for (int u = 0; u < m; u++) {
-				ceh[u] = buf[u];
+				factory1[u] = buf[u];
 			}
 			delete[] buf;
 			for (h = 0; h < m; h++) {
-				if (ceh[h].number == da) {
+				if (factory1[h].number == da) {
 					r = 1;
 					d = h;
 					break;
 				}
 			}
 			if (!r) {
-				delete[] ceh;
+				delete[] factory1;
 				printf("%lf шт.", k);
 				return;
 			}
 		}
 	}
 	void minn() {
-		cout << amount_min;
+		std::cout << amount_min;
 	}
 	void maxx() {
-		cout << amount_max;
+		std::cout << amount_max;
 	}
 };
 
@@ -307,42 +304,34 @@ int main() {
 	int m;
 	printf("Количество продукции: ");
 	scanf("%d", &m);
-	while (cin.fail() || m < 1) {
+	while (std::cin.fail() || m < 1) {
 		clear_m();
 		printf("\nВведите корректное значение: ");
 		scanf("%d", &m);
 	}
-	Cex* ceh = new Cex[m];
-	ceh[0].cin_s(ceh, 0, m);
+	factory* factory1 = new factory[m];
+	factory1[0].cin_s(factory1, 0, m);
 	for (;;) {
-		printf("\n\n		Выберите пункт:"
-			"\n		1 - просмотр полного списка"
-			"\n		2 - отсортировать список"
-			"\n		3 - дополнить список"
-			"\n		4 - удаление одного элемента из списка"
-			"\n		5 - количество выпущенных изделий определённого цеха"
-			"\n		6 - максимальное кол-во"
-			"\n		7 - минимальное кол-во"
-			"\n		8 - выход\n");
+		printf("\nВыберите действие(1 - просмотр полного списка, 2 - отсортировать список, 3 - дополнить список,4 - удаление одного элемента из списка, 5 - количество выпущенных изделий определённого цеха, 6 - максимальное кол-во, 7 - минимальное кол-во,8 - выход): ");
 		int l;
 		scanf("%d", &l);
-		while (cin.fail() || l < 1 || l>8) {
+		while (std::cin.fail() || l < 1 || l>8) {
 			clear_m();
 			printf("\nВведите корректное значение: ");
 			scanf("%d", &l);
 		}
 		switch (l)
 		{
-		case 1: ceh[0].cout_s(ceh, m); break;
-		case 2: ceh[0].shekerSort(ceh, m); break;
-		case 3: ceh[0].dop(ceh, m); break;
-		case 4: ceh[0].delete_s(ceh, m); break;
-		case 5: ceh[0].detail(ceh, m); break;
+		case 1: factory1[0].cout_s(factory1, m); break;
+		case 2: factory1[0].shekerSort(factory1, m); break;
+		case 3: factory1[0].dop(factory1, m); break;
+		case 4: factory1[0].delete_s(factory1, m); break;
+		case 5: factory1[0].detail(factory1, m); break;
 		case 6: if (!m)break;
-			ceh[0].maxx(); break;
+			factory1[0].maxx(); break;
 		case 7: if (!m) break;
-			ceh[0].minn(); break;
+			factory1[0].minn(); break;
 		case 8: return 0; break;
 		}
 	}
-}ё
+}
