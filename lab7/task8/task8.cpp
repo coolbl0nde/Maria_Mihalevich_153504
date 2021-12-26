@@ -45,17 +45,17 @@ int main() {
 		short E = atoi(e.c_str());
 		if (i % A == C) {
 			i += B;
-			a.push_back('0');
-			b.push_back('8');
-			c.push_back('1');
+			a += "0";
+			b += "8";
+			c += "1";
 		}
 		else if (i % E == 11) {
 			i += 88;
-			e.push_back('0');
+			e += "0";
 		}
 		else if ((i % D) % 10 == 1 && i != 1) {
 			i += 8;
-			d.push_back('0');
+			d += "0";
 			continue;
 		}
 	}

@@ -259,7 +259,7 @@ std::string process(std::string str) {
 }
 
 //task4
-TEST(test2_process, task4) {
+TEST(test1, task4) {
 
 	EXPECT_EQ("Tu strong for ung Prinse Josef to folov.", process("Too strong for young Prince Joseph to follow."));
 	EXPECT_TRUE(true);
