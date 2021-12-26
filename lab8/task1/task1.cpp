@@ -40,14 +40,71 @@ struct station {
 	}
 };
 
-station* AddStruct(station* Obj, int& OldSize, int& NewSize) { // освободить память для структуры
-	NewSize = OldSize + NewSize;
-	if (OldSize == 0) {
-		Obj = new station[NewSize];
+station* AddStruct(station* Obj, int& OldSize, int& NewSize);
+void SetData(station* Obj, int& OldSize, int NewSize);
+void ShowData(station* Obj, int NewSize);
+void FindData(station* Obj, int NewSize);
+station* DeleteStruct(station* Obj, int& Size);
+void insertSort(station* Obj, int size);
+
+int main() {
+
+	setlocale(LC_ALL, "Rus");
+
+	station* stations = 0;
+	int size = 0, size1 = 0;
+
+	do {
+		int sw;
+		cout << "Выберите действие(1 - создать массив структур, 2 - просмотреть данные,3 - найти по элементу,4 - сортировать(по убыванию), 5 - удалить/изменить, 6 - очистить консоль, 0 - выход): ";
+
+		while (!(cin >> sw) || sw > 6) {
+			cout << "Введите корректное значение: ";
+			cin.clear();
+			cin.ignore(1000, '\n');
+		}
+
+		if (sw == 1) {
+			printf("Введите размер массива: ");
+			scanf_s("%d", &size1);
+			stations = AddStruct(stations, size, size1);
+			SetData(stations, size, size1);
+			size = size1;
+		}
+		else if (sw == 2) {
+			ShowData(stations, size1);
+		}
+		else if (sw == 3) {
+			if (stations != 0)
+				FindData(stations, size1);
+		}
+		else if (sw == 4) {
+			if (stations != 0)
+				insertSort(stations, size1);
+		}
+		else if (sw == 5) {
+			if (stations != 0)
+				stations = DeleteStruct(stations, size1);
+		}
+		else if (sw == 6) {
+			system("cls");
+		}
+		else if (sw == 0) {
+			break;
+		}
+	} while (true);
+
+	return 0;
+}
+
+station* AddStruct(station* Obj, int& size, int& size1) { // освободить память для структуры
+	size1 = size + size1;
+	if (size == 0) {
+		Obj = new station[size1];
 	}
 	else {
-		station* temp_Obj = new station[NewSize];
-		for (int i = 0; i < OldSize; i++) {
+		station* temp_Obj = new station[size1];
+		for (int i = 0; i < size; i++) {
 			temp_Obj[i] = Obj[i];
 		}
 		delete[] Obj;
@@ -56,7 +113,7 @@ station* AddStruct(station* Obj, int& OldSize, int& NewSize) { // освобод
 	return Obj;
 }
 
-void SetData(station* Obj, int& OldSize, int NewSize) { // ввод данный в структуру
+void SetData(station* Obj, int& size, int size1) { // ввод данный в структуру
 	setlocale(LC_ALL, "Rus");
 	int index;
 	cout << "Выберите, как ввести данные(1 - заполнить всю память, 2 - заполнить до определённого элемента):\n";
@@ -66,7 +123,7 @@ void SetData(station* Obj, int& OldSize, int NewSize) { // ввод данный
 		cin.ignore(10000, '\n');
 	}
 	if (index == 1) {
-		for (int i = OldSize; i < NewSize; i++) {
+		for (int i = size; i < size1; i++) {
 			printf("Введите Пункт назначения:\n");
 			rewind(stdin);
 			while (!(cin >> Obj[i].destination)) {
@@ -93,7 +150,7 @@ void SetData(station* Obj, int& OldSize, int NewSize) { // ввод данный
 				cin.ignore(10000, '\n');
 			}
 		}
-		OldSize = NewSize;
+		size = size1;
 	}
 	else if (index == 2) {
 		cout << "Выберите элемент(1 - Пункт назначения,2 - время отправления,часы, 3 - время отправления,минуты, 4 - число свободных мест):\n";
@@ -110,7 +167,7 @@ void SetData(station* Obj, int& OldSize, int NewSize) { // ввод данный
 			cin.clear();
 			cin.ignore(10000, '\n');
 		}
-		for (int i = OldSize; i < NewSize; i++) {
+		for (int i = size; i < size1; i++) {
 			printf("Введите Пункт назначения:\n");
 			rewind(stdin);
 			while (!(cin >> Obj[i].destination)) {
@@ -152,15 +209,15 @@ void SetData(station* Obj, int& OldSize, int NewSize) { // ввод данный
 	}
 }
 
-void ShowData(station* Obj, int NewSize) { // вывести структуру
+void ShowData(station* Obj, int size1) { // вывести структуру
 	setlocale(LC_ALL, "Rus");
 	cout << "№\t\t" << "Пункт назначения:\t" << "Время отправления,часы:\t\t" << "Время отправления,минуты:\t\t" << "Число свободных мест:\n";
-	for (int i = 0; i < NewSize; i++) {
+	for (int i = 0; i < size1; i++) {
 		cout << i + 1 << "\t\t\t      " << Obj[i].destination << "\t\t\t      " << Obj[i].departuretimeHours << "\t\t\t      " << Obj[i].departuretimeMinutes << "\t\t\t\t      " << Obj[i].numberofavailableseats << "\n";
 	}
 }
 
-void FindData(station* Obj, int NewSize) { // поиск по элементу
+void FindData(station* Obj, int size1) { // поиск по элементу
 	setlocale(LC_ALL, "Rus");
 	int N;
 	cout << "Выберите элемент для поиска(1 - Пункт назначения, 2 - время отправления,часы, 3 - время отправления,часы, 4 - число свободных мест):\n";
@@ -170,7 +227,7 @@ void FindData(station* Obj, int NewSize) { // поиск по элементу
 		cout << "Введите заначение:\n";
 		cin >> k;
 		cout << "№\t\t" << "Пункт назначения:\t" << "Время отправления,часы:\t\t" << "Время отправления,минуты:\t\t" << "Число свободных мест:\n";
-		for (int i = 0; i < NewSize; i++) {
+		for (int i = 0; i < size1; i++) {
 			if (Obj[i].destination == k)
 				cout << i + 1 << "\t\t\t      " << Obj[i].destination << "\t\t\t      " << Obj[i].departuretimeHours << "\t\t\t      " << Obj[i].departuretimeMinutes << "\t\t\t\t      " << Obj[i].numberofavailableseats << "\n";
 		}
@@ -180,7 +237,7 @@ void FindData(station* Obj, int NewSize) { // поиск по элементу
 		cout << "Введите значение:\n";
 		cin >> k;
 		cout << "№\t\t" << "Пункт назначения:\t" << "Время отправления,часы:\t\t" << "Время отправления,минуты:\t\t" << "Число свободных мест:\n";
-		for (int i = 0; i < NewSize; i++) {
+		for (int i = 0; i < size1; i++) {
 			if (Obj[i].departuretimeHours == k)
 				cout << i + 1 << "\t\t\t      " << Obj[i].destination << "\t\t\t      " << Obj[i].departuretimeHours << "\t\t\t      " << Obj[i].departuretimeMinutes << "\t\t\t\t      " << Obj[i].numberofavailableseats << "\n";
 		}
@@ -190,7 +247,7 @@ void FindData(station* Obj, int NewSize) { // поиск по элементу
 		cout << "Введите значение:\n";
 		cin >> k;
 		cout << "№\t\t" << "Пункт назначения:\t" << "Время отправления,часы:\t\t" << "Время отправления,минуты:\t\t" << "Число свободных мест:\n";
-		for (int i = 0; i < NewSize; i++) {
+		for (int i = 0; i < size1; i++) {
 			if (Obj[i].departuretimeMinutes == k)
 				cout << i + 1 << "\t\t\t      " << Obj[i].destination << "\t\t\t      " << Obj[i].departuretimeHours << "\t\t\t      " << Obj[i].departuretimeMinutes << "\t\t\t\t      " << Obj[i].numberofavailableseats << "\n";
 		}
@@ -200,13 +257,14 @@ void FindData(station* Obj, int NewSize) { // поиск по элементу
 		cout << "Введите значение:\n";
 		cin >> k;
 		cout << "№\t\t" << "Пункт назначения:\t" << "Время отправления,часы:\t\t" << "Время отправления,минуты:\t\t" << "Число свободных мест:\n";
-		for (int i = 0; i < NewSize; i++) {
+		for (int i = 0; i < size1; i++) {
 			if (Obj[i].numberofavailableseats == k)
 				cout << i + 1 << "\t\t\t      " << Obj[i].destination << "\t\t\t      " << Obj[i].departuretimeHours << "\t\t\t      " << Obj[i].departuretimeMinutes << "\t\t\t\t      " << Obj[i].numberofavailableseats << "\n";
 		}
 	}
 }
-station* DeleteStruct(station* Obj, int& Size) { // удаление/изменение структуры
+
+station* DeleteStruct(station* Obj, int& size1) { // удаление/изменение структуры
 	setlocale(LC_ALL, "Rus");
 	int k;
 	cout << "1 - удалить структуру, 2 - изменить структуру:\n";
@@ -217,7 +275,7 @@ station* DeleteStruct(station* Obj, int& Size) { // удаление/измен�
 	}
 	if (k == 1) {
 		int m;
-		ShowData(Obj, Size);
+		ShowData(Obj, size1);
 		cout << "Выберите элемент, который хотите удалить:\n";
 		while (!(cin >> m)) {
 			cout << "Введите корректное значение:\n";
@@ -225,8 +283,8 @@ station* DeleteStruct(station* Obj, int& Size) { // удаление/измен�
 			cin.ignore(10000, '\n');
 		}
 		int j = 0;
-		station* temp_Obj = new station[Size - 1];
-		for (int i = 0; i < Size; i++) {
+		station* temp_Obj = new station[size1 - 1];
+		for (int i = 0; i < size1; i++) {
 			if (i != m - 1) {
 				temp_Obj[j] = Obj[i];
 				j++;
@@ -234,13 +292,13 @@ station* DeleteStruct(station* Obj, int& Size) { // удаление/измен�
 			else
 				continue;
 		}
-		Size--;
+		size1--;
 		delete[] Obj;
 		Obj = temp_Obj;
 	}
 	else if (k == 2) {
 		int m;
-		ShowData(Obj, Size);
+		ShowData(Obj, size1);
 		cout << "Выберите элемент, который хотите изменить:\n";
 		while (!(cin >> m)) {
 			cout << "Введите корректное значение:\n";
@@ -276,12 +334,12 @@ station* DeleteStruct(station* Obj, int& Size) { // удаление/измен�
 	}
 	return Obj;
 }
-void insertSort(station* Obj, int size)
-{
+
+void insertSort(station* Obj, int size1){
 	setlocale(LC_ALL, "Rus");
 	cout << "Cортировка:";
 	station temp;
-	for (int i = 1; i < size; i++)
+	for (int i = 1; i < size1; i++)
 	{
 		for (int j = i; j > 0; j--)
 		{
@@ -293,48 +351,4 @@ void insertSort(station* Obj, int size)
 			}
 		}
 	}
-}
-int main() {
-	setlocale(LC_ALL, "Rus");
-	station* stations = 0;
-	int OldSize = 0;
-	int NewSize = 0;
-	do {
-		int sw;
-		cout << "Выберите действие(1 - создать массив структур, 2 - просмотреть данные,3 - найти по элементу,4 - сортировать(по убыванию), 5 - удалить/изменить, 6 - очистить консоль, 0 - выход):\n";
-		while (!(cin >> sw) || sw > 6) {
-			cout << "Введите корректное значение:\n";
-			cin.clear();
-			cin.ignore(1000, '\n');
-		}
-		if (sw == 1) {
-			printf("Введите размер массива:\n");
-			scanf_s("%d", &NewSize);
-			stations = AddStruct(stations, OldSize, NewSize);
-			SetData(stations, OldSize, NewSize);
-			OldSize = NewSize;
-		}
-		else if (sw == 2) {
-			ShowData(stations, NewSize);
-		}
-		else if (sw == 3) {
-			if (stations != 0)
-				FindData(stations, NewSize);
-		}
-		else if (sw == 4) {
-			if (stations != 0)
-				insertSort(stations, NewSize);
-		}
-		else if (sw == 5) {
-			if (stations != 0)
-				stations = DeleteStruct(stations, NewSize);
-		}
-		else if (sw == 6) {
-			system("cls");
-		}
-		else if (sw == 0) {
-			break;
-		}
-	} while (true);
-	return 0;
 }
