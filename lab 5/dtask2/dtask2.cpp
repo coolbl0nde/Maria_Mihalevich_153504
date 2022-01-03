@@ -25,16 +25,16 @@ int input() {
     }
 }
 
-unsigned long long int F(unsigned long long int x, unsigned long long int y, unsigned long long int z) {
+unsigned long long int f(unsigned long long int x, unsigned long long int y, unsigned long long int z) {
 
     if (y == 0) return 1;
-    else if (y % 2)return x * F(x * x % z, y / 2, z) % z;
-    else return F(x * x % z, y / 2, z);
+    else if (y % 2)return x * f(x * x % z, y / 2, z) % z;
+    else return f(x * x % z, y / 2, z);
 }
 
 int main() {
 
-    unsigned long long int k, n, t, m, f, N = 1, l;
+    unsigned long long int k, n, t, m, N = 1, l;
 
 	std::cout << "Enter k, n, t: ";
     k = input();
@@ -46,7 +46,7 @@ int main() {
 
     while (k != 0 && n != 0) {
         if (N != 1) arr = (int*)realloc(arr, N * sizeof(int));
-        arr[N - 1] = F(l, n, m);
+        arr[N - 1] = f(l, n, m);
         N++;
         k = input();
         n = input();
