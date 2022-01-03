@@ -1,4 +1,4 @@
-﻿//Лабороторная 4, задача 15. Выполнена: Михалевич М.П.
+﻿//Лабороторная 4, задача 10. Выполнена: Михалевич М.П.
 /*Построить магический квадрат любого порядка, используя любой алгоритм.
 Выделение памяти через функции языка С.*/
 
@@ -49,7 +49,7 @@ int main() {
     }
     else if (n % 2 == 1) {
         i = 0;
-        j = static_cast<int>(n / 2); 
+        j = (int)(n / 2); 
 
         square[i][j] = 1; 
 
@@ -149,26 +149,26 @@ int main() {
     else {
         int length4 = n / 2;
 
-        int** arr1;
-        arr1 = (int**)calloc(length4, sizeof(*arr1));
-        int** arr2;
-        arr2 = (int**)calloc(length4, sizeof(*arr2));
-        int** arr3;
-        arr3 = (int**)calloc(length4, sizeof(*arr3));
-        int** arr4;
-        arr4 = (int**)calloc(length4, sizeof(*arr4));
+        int** array1;
+        array1 = (int**)calloc(length4, sizeof(*array1));
+        int** array2;
+        array2 = (int**)calloc(length4, sizeof(*array2));
+        int** array3;
+        array3 = (int**)calloc(length4, sizeof(*array3));
+        int** array4;
+        array4 = (int**)calloc(length4, sizeof(*array4));
 
         for (int i = 0; i < length4; ++i) {
-            arr1[i] = (int*)calloc(length4, sizeof(*arr1[i]));
+            array1[i] = (int*)calloc(length4, sizeof(*array1[i]));
         }
         for (int i = 0; i < length4; ++i) {
-            arr2[i] = (int*)calloc(length4, sizeof(*arr2[i]));
+            array2[i] = (int*)calloc(length4, sizeof(*array2[i]));
         }
         for (int i = 0; i < length4; ++i) {
-            arr3[i] = (int*)calloc(length4, sizeof(*arr3[i]));
+            array3[i] = (int*)calloc(length4, sizeof(*array3[i]));
         }
         for (int i = 0; i < length4; ++i) {
-            arr4[i] = (int*)calloc(length4, sizeof(*arr4[i]));
+            array4[i] = (int*)calloc(length4, sizeof(*array4[i]));
         }
 
         int max1 = n * n / 4;
@@ -179,32 +179,32 @@ int main() {
         int k = 1;
 
         i = 0;
-        j = static_cast<int>(length4 / 2);
-        arr1[i][j] = 1;
+        j = (int)(length4 / 2);
+        array1[i][j] = 1;
         k++;
 
         while (k < max1 + 1) {
-            if (i - 1 > -1 && j - 1 > -1 && arr1[i - 1][j - 1] == 0) {
-                arr1[i - 1][j - 1] = k;
+            if (i - 1 > -1 && j - 1 > -1 && array1[i - 1][j - 1] == 0) {
+                array1[i - 1][j - 1] = k;
                 i--;
                 j--;
             }
-            else if (i - 1 > -1 && j - 1 > -1 && arr1[i - 1][j - 1] != 0 && i + 1 < length4) {
-                arr1[i + 1][j] = k;
+            else if (i - 1 > -1 && j - 1 > -1 && array1[i - 1][j - 1] != 0 && i + 1 < length4) {
+                array1[i + 1][j] = k;
                 i++;
             }
             else if (i - 1 < 0 && j - 1 >= 0) {
-                arr1[length4 - 1][j - 1] = k;
+                array1[length4 - 1][j - 1] = k;
                 i = length4 - 1;
                 j--;
             }
             else if (i - 1 >= 0 && j - 1 < 0) {
-                arr1[i - 1][length4 - 1] = k;
+                array1[i - 1][length4 - 1] = k;
                 j = length4 - 1;
                 i--;
             }
-            else if (i - 1 < 0 && j - 1 < 0 && arr1[length4 - 1][length4 - 1] != 0 && i + 1 < length4) {
-                arr1[i + 1][j] = k;
+            else if (i - 1 < 0 && j - 1 < 0 && array1[length4 - 1][length4 - 1] != 0 && i + 1 < length4) {
+                array1[i + 1][j] = k;
                 i++;
             }
 
@@ -212,33 +212,33 @@ int main() {
         }
 
         i = 0;
-        j = static_cast<int>(length4 / 2);
-        arr4[i][j] = k;
+        j = (int)(length4 / 2);
+        array4[i][j] = k;
 
         k++;
 
         while (k < max2 + 1) {
-            if (i - 1 > -1 && j - 1 >= 0 && arr4[i - 1][j - 1] == 0) {
-                arr4[i - 1][j - 1] = k;
+            if (i - 1 > -1 && j - 1 >= 0 && array4[i - 1][j - 1] == 0) {
+                array4[i - 1][j - 1] = k;
                 i--;
                 j--;
             }
-            else if (i - 1 >= 0 && j - 1 >= 0 && arr4[i - 1][j - 1] != 0 && i + 1 < length4) {
-                arr4[i + 1][j] = k;
+            else if (i - 1 >= 0 && j - 1 >= 0 && array4[i - 1][j - 1] != 0 && i + 1 < length4) {
+                array4[i + 1][j] = k;
                 i++;
             }
             else if (i - 1 < 0 && j - 1 >= 0) {
-                arr4[length4 - 1][j - 1] = k;
+                array4[length4 - 1][j - 1] = k;
                 i = length4 - 1;
                 j--;
             }
             else if (i - 1 >= 0 && j - 1 < 0) {
-                arr4[i - 1][length4 - 1] = k;
+                arayr4[i - 1][length4 - 1] = k;
                 j = length4 - 1;
                 i--;
             }
-            else if (i - 1 < 0 && j - 1 < 0 && arr4[length4 - 1][length4 - 1] != 0 && i + 1 < length4) {
-                arr4[i + 1][j] = k;
+            else if (i - 1 < 0 && j - 1 < 0 && array4[length4 - 1][length4 - 1] != 0 && i + 1 < length4) {
+                array4[i + 1][j] = k;
                 i++;
             }
 
@@ -246,33 +246,33 @@ int main() {
         }
 
         i = 0;
-        j = static_cast<int>(length4 / 2);
-        arr2[i][j] = k;
+        j = (int)(length4 / 2);
+        array2[i][j] = k;
 
         k++;
 
         while (k < max3 + 1) {
-            if (i - 1 >= 0 && j - 1 >= 0 && arr2[i - 1][j - 1] == 0) {
-                arr2[i - 1][j - 1] = k;
+            if (i - 1 >= 0 && j - 1 >= 0 && array2[i - 1][j - 1] == 0) {
+                array2[i - 1][j - 1] = k;
                 i--;
                 j--;
             }
-            else if (i - 1 >= 0 && j - 1 >= 0 && arr2[i - 1][j - 1] != 0 && i + 1 < length4) {
-                arr2[i + 1][j] = k;
+            else if (i - 1 >= 0 && j - 1 >= 0 && array2[i - 1][j - 1] != 0 && i + 1 < length4) {
+                array2[i + 1][j] = k;
                 i++;
             }
             else if (i - 1 < 0 && j - 1 >= 0) {
-                arr2[length4 - 1][j - 1] = k;
+                array2[length4 - 1][j - 1] = k;
                 i = length4 - 1;
                 j--;
             }
             else if (i - 1 >= 0 && j - 1 < 0) {
-                arr2[i - 1][length4 - 1] = k;
+                array2[i - 1][length4 - 1] = k;
                 j = length4 - 1;
                 i--;
             }
-            else if (i - 1 < 0 && j - 1 < 0 && arr2[length4 - 1][length4 - 1] != 0 && i + 1 < length4) {
-                arr2[i + 1][j] = k;
+            else if (i - 1 < 0 && j - 1 < 0 && array2[length4 - 1][length4 - 1] != 0 && i + 1 < length4) {
+                array2[i + 1][j] = k;
                 i++;
             }
 
@@ -280,49 +280,49 @@ int main() {
         }
 
         i = 0;
-        j = static_cast<int>(length4 / 2);
-        arr3[i][j] = k;
+        j = (int)(length4 / 2);
+        array3[i][j] = k;
 
         k++;
 
         while (k < max4 + 1) {
-            if (i - 1 >= 0 && j - 1 >= 0 && arr3[i - 1][j - 1] == 0) {
-                arr3[i - 1][j - 1] = k;
+            if (i - 1 >= 0 && j - 1 >= 0 && array3[i - 1][j - 1] == 0) {
+                array3[i - 1][j - 1] = k;
                 i--;
                 j--;
             }
-            else if (i - 1 >= 0 && j - 1 >= 0 && arr3[i - 1][j - 1] != 0 && i + 1 < length4) {
-                arr3[i + 1][j] = k;
+            else if (i - 1 >= 0 && j - 1 >= 0 && array3[i - 1][j - 1] != 0 && i + 1 < length4) {
+                array3[i + 1][j] = k;
                 i++;
             }
             else if (i - 1 < 0 && j - 1 >= 0) {
-                arr3[length4 - 1][j - 1] = k;
+                array3[length4 - 1][j - 1] = k;
                 i = length4 - 1;
                 j--;
             }
             else if (i - 1 >= 0 && j - 1 < 0) {
-                arr3[i - 1][length4 - 1] = k;
+                array3[i - 1][length4 - 1] = k;
                 j = length4 - 1;
                 i--;
             }
-            else if (i - 1 < 0 && j - 1 < 0 && arr3[length4 - 1][length4 - 1] != 0 && i + 1 < length4) {
-                arr3[i + 1][j] = k;
+            else if (i - 1 < 0 && j - 1 < 0 && array3[length4 - 1][length4 - 1] != 0 && i + 1 < length4) {
+                array3[i + 1][j] = k;
                 i++;
             }
 
             k++;
         }
 
-        buff = arr1[0][0];
-        arr1[0][0] = arr3[0][0];
-        arr3[0][0] = buff;
+        buff = array1[0][0];
+        array1[0][0] = array3[0][0];
+        array3[0][0] = buff;
 
         y = 1; 
 
         while (y < length4 - 1) {
-            buff = arr1[y][1];
-            arr1[y][1] = arr3[y][1];
-            arr3[y][1] = buff;
+            buff = array1[y][1];
+            array1[y][1] = array3[y][1];
+            array3[y][1] = buff;
 
             y++;
         }
@@ -332,13 +332,13 @@ int main() {
         if (k > 0) {
             while (k > 0) {
                 for (int i = 0; i < length4; ++i) {
-                    buff = arr1[i][length4 - k];
-                    arr1[i][length4 - k] = arr3[i][length4 - k];
-                    arr3[i][length4 - k] = buff;
+                    buff = array1[i][length4 - k];
+                    array1[i][length4 - k] = array3[i][length4 - k];
+                    array3[i][length4 - k] = buff;
 
-                    buff = arr2[i][k - 1];
-                    arr2[i][k - 1] = arr4[i][k - 1];
-                    arr4[i][k - 1] = buff;
+                    buff = array2[i][k - 1];
+                    array2[i][k - 1] = array4[i][k - 1];
+                    array4[i][k - 1] = buff;
                 }
 
                 k--;
@@ -347,32 +347,32 @@ int main() {
 
         for (int i = 0; i < length4; ++i) {
             for (int j = 0; j < length4; ++j) {
-                square[i][j] = arr1[i][j];
-                square[i][j + length4] = arr2[i][j];
-                square[i + length4][j] = arr3[i][j];
-                square[i + length4][j + length4] = arr4[i][j];
+                square[i][j] = array1[i][j];
+                square[i][j + length4] = array2[i][j];
+                square[i + length4][j] = array3[i][j];
+                square[i + length4][j + length4] = array4[i][j];
             }
         }
 
         for (int i = 0; i < length4; ++i) {
-            free(arr1[i]);
+            free(array1[i]);
         }
-        free(arr1);
+        free(array1);
 
         for (int i = 0; i < length4; ++i) {
-            free(arr2[i]);
+            free(array2[i]);
         }
-        free(arr2);
+        free(array2);
 
         for (int i = 0; i < length4; ++i) {
-            free(arr3[i]);
+            free(array3[i]);
         }
-        free(arr3);
+        free(array3);
 
         for (int i = 0; i < length4; ++i) {
-            free(arr4[i]);
+            free(array4[i]);
         }
-        free(arr4);
+        free(array4);
     }
 
 
