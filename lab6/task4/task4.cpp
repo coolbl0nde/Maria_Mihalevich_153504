@@ -7,113 +7,112 @@
 #include <iostream> 
 int main() {
 	int size = 101;
-	char* text = new char[size];
-	std::cin.getline(text, size);
-	size = strlen(text);
+	char* str = new char[size];
+
+	std::cout << "Enter line: ";
+	std::cin.getline(str, size);
+	*str = strlen(str);
+
 	for (int i = 0; i < size; ++i) {
-		if (text[i] == 'c') {
-			if (text[i + 1] == 'e' || text[i + 1] == 'i' || text[i + 1] == 'y') text[i] = 's';
-			else text[i] = 'k';
-		}
-		if (text[i] == 'C') {
-			if (text[i + 1] == 'e' || text[i + 1] == 'i' || text[i + 1] == 'y') text[i] = 'C';
-			else text[i] = 'K';
-		}
-		if (text[i] == 'q') {
-			text[i] = 'k';
-			if (text[i + 1] == 'u') text[i + 1] = 'v';
-		}
-		if (text[i] == 'Q') {
-			text[i] = 'K';
-			if (text[i + 1] == 'u') text[i + 1] = 'v';
-		}
+		if (str[i] == 'x') {
+			for (int k = size - 1; k > i; --k) str[k] = str[k - 1];
 
-		if (text[i] == 'x') {
-			for (int k = size - 1; k > i; --k)
-				text[k] = text[k - 1];
-
-			text[i] = 'k';
-			text[i + 1] = 's';
+			str[i] = 'k';
+			str[i + 1] = 's';
 		}
-		if (text[i] == 'X') {
+		if (str[i] == 'X') {
 			char tmp = 0;
-			for (int m = i; text[m] != ' '; ++m)
-				++tmp;
+			for (int m = i; str[m] != ' '; ++m) ++tmp;
 
-			for (int m = i + tmp + 1; m > i; --m)
-				text[m - 1] = text[m];
+			for (int m = i + tmp + 1; m > i; --m) str[m - 1] = str[m];
 
-			text[i] = 'K';
-			text[i + 1] = 's';
+			str[i] = 'K';
+			str[i + 1] = 's';
 		}
-		if (text[i] == 'w')
-			text[i] = 'v';
-
-		if (text[i] == 'W')
-			text[i] = 'V';
-
-		if (text[i] == 'y' && text[i + 1] == 'o' && text[i + 2] == 'u') {
-			text[i] = 'u';
+		if (str[i] == 'w') str[i] = 'v';
+		if (str[i] == 'W') str[i] = 'V';
+		if (str[i] == 'y' && str[i + 1] == 'o' && str[i + 2] == 'u') {
+			str[i] = 'u';
 			for (int k = i + 1; k < size; ++k)
-				text[k] = text[k + 2];
+				str[k] = str[k + 2];
 		}
-		if (text[i] == 'o' && text[i + 1] == 'o') {
-			text[i] = 'u';
+		if (str[i] == 'o' && str[i + 1] == 'o') {
+			str[i] = 'u';
 			for (int k = i + 1; k < size; ++k)
-				text[k] = text[k + 1];
+				str[k] = str[k + 1];
 		}
-		if (text[i] == 'e' && text[i + 1] == 'e') {
-			text[i] = 'i';
+		if (str[i] == 'e' && str[i + 1] == 'e') {
+			str[i] = 'i';
 			for (int k = i + 1; k < size; ++k)
-				text[k] = text[k + 1];
+				str[k] = str[k + 1];
 		}
-		if (text[i] == 't' && text[i + 1] == 'h') {
-			text[i] = 'z';
+		if (str[i] == 'c') {
+			if (str[i + 1] == 'e' || str[i + 1] == 'i' || str[i + 1] == 'y') str[i] = 's';
+			else str[i] = 'k';
+		}
+		if (str[i] == 'C') {
+			if (str[i + 1] == 'e' || str[i + 1] == 'i' || str[i + 1] == 'y') str[i] = 'C';
+			else str[i] = 'K';
+		}
+		if (str[i] == 'q') {
+			str[i] = 'k';
+			if (str[i + 1] == 'u') str[i + 1] = 'v';
+		}
+		if (str[i] == 'Q') {
+			str[i] = 'K';
+			if (str[i + 1] == 'u') str[i + 1] = 'v';
+		}
+		if (str[i] == 't' && str[i + 1] == 'h') {
+			str[i] = 'z';
 			for (int k = i + 1; k < size; ++k)
-				text[k] = text[k + 1];
+				str[k] = str[k + 1];
 		}
-		if (text[i] == 'T' && text[i + 1] == 'h') {
-			text[i] = 'Z';
+		if (str[i] == 'T' && str[i + 1] == 'h') {
+			str[i] = 'Z';
 			for (int k = i + 1; k < size; ++k)
-				text[k] = text[k + 1];
+				str[k] = str[k + 1];
 		}
-		if (text[i] == 'p' && text[i + 1] == 'h') {
-			text[i] = 'f';
+		if (str[i] == 'p' && str[i + 1] == 'h') {
+			str[i] = 'f';
 			for (int k = i + 1; k < size; ++k)
-				text[k] = text[k + 1];
+				str[k] = str[k + 1];
 		}
-		if (text[i] == 'P' && text[i + 1] == 'h') {
-			text[i] = 'F';
+		if (str[i] == 'P' && str[i + 1] == 'h') {
+			str[i] = 'F';
 			for (int k = i + 1; k < size; ++k)
-				text[k] = text[k + 1];
+				str[k] = str[k + 1];
 		}
-		if (text[i] == 'Y' && text[i + 1] == 'o' && text[i + 2] == 'u') {
-			text[i] = 'U';
+		if (str[i] == 'Y' && str[i + 1] == 'o' && str[i + 2] == 'u') {
+			str[i] = 'U';
 			for (int k = i + 1; k < size; ++k)
-				text[k] = text[k + 2];
+				str[k] = str[k + 2];
 		}
-		if (text[i] == text[i + 1]) {
+		if (str[i] == str[i + 1]) {
 			int counter = 1;
-			while (text[i + counter] == text[i]) ++counter;
+			while (str[i + counter] == str[i]) ++counter;
 			--counter;
 			for (int k = i + 1; k < size; ++k)
-				text[k] = text[k + counter];
+				str[k] = str[k + counter];
 		}
 	}
 	for (int i = 0; i < size; ++i) {
-		if (text[i] == text[i + 1]) {
+		if (str[i] == str[i + 1]) {
 			int counter = 1;
-			while (text[i + counter] == text[i]) ++counter;
+			while (str[i + counter] == str[i]) ++counter;
 			--counter;
 			for (int k = i + 1; k < size; ++k)
-				text[k] = text[k + counter];
+				str[k] = str[k + counter];
 		}
 
 	}
+
+	std::cout << "New line: ";
+
 	for (int i = 0; i < size; ++i) {
-		if (text[i] == 32 || text[i] == 44 || text[i] == 46 || (text[i] >= 65 && text[i] <= 90) || (text[i] >= 97 && text[i] <= 122))
-			std::cout << text[i];
+		if (str[i] == 44 || str[i] == 46 || str[i] == 32 || (str[i] >= 65 && str[i] <= 90) || (str[i] >= 97 && str[i] <= 122))
+			std::cout << str[i];
 	}
-	delete[] text;
+
+	delete[] str;
 	return 0;
 }

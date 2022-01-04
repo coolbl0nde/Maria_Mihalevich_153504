@@ -3,74 +3,75 @@
 
 #include <iostream>
 #include <string>
-#include <cctype>
 #include <cmath>
+#include <cctype>
 
 int main() {
-    double buff, sum = 0;
-    int fraction, ex;
-    bool minus, exMinus;
 
-    std::string str;
+    int fraction, ex;
+    double buff, summa = 0;
+    bool minus, Minus;
+
+    std::string text;
 
     std::cout << "Enter line: ";
-    std::getline(std::cin, str);
+    std::getline(std::cin, text);
 
-    int count = 0;
+    int n = 0;
 
-    while (count < str.length()) {
+    while (n < text.length()) {
         minus = false;
 
-        if (isdigit(str[count])) {
-            if (count > 0 && str[count - 1] == '-') {
-                buff = str[count] - '0';
+        if (isdigit(text[n])) {
+            if (n > 0 && text[n - 1] == '-') {
+                buff = text[n] - '0';
                 minus = true;
             }
             else {
-                buff = str[count] - '0';
+                buff = text[n] - '0';
             }
 
-            ++count;
+            ++n;
 
-            while (isdigit(str[count])) {
-                buff = buff * 10 + (str[count] - '0');
-                ++count;
+            while (isdigit(text[n])) {
+                buff = buff * 10 + (text[n] - '0');
+                ++n;
             }
 
             fraction = 1;
 
-            if (str[count] == '.' && isdigit(str[count + 1])) {
-                ++count;
+            if (text[n] == '.' && isdigit(text[n + 1])) {
+                ++n;
 
-                while (isdigit(str[count])) {
+                while (isdigit(text[n])) {
                     fraction *= 10;
-                    buff = buff + (double)(str[count] - '0') / fraction;
-                    ++count;
+                    buff = buff + (double)(text[n] - '0') / fraction;
+                    ++n;
                 }
             }
 
-            if ((str[count] == 'e' || str[count] == 'E') && (isdigit(str[count + 1]) || (str[count + 1] == '+' && isdigit(str[count + 2])) || (str[count + 1] == '-' && isdigit(str[count + 2])))) {
-                exMinus = false;
+            if ((isdigit(text[n + 1]) || (text[n + 1] == '+' && isdigit(text[n + 2])) || (text[n + 1] == '-' && isdigit(text[n + 2]))) && (text[n] == 'e' || text[n] == 'E')) {
+                Minus = false;
 
-                ++count;
+                ++n;
 
-                if (str[count] == '-') {
-                    exMinus = true;
-                    ++count;
+                if (text[n] == '-') {
+                    Minus = true;
+                    ++n;
                 }
-                else if (str[count] == '+') {
-                    ++count;
-                }
-
-                ex = str[count] - '0';
-                ++count;
-
-                while (isdigit(str[count])) {
-                    ex = ex * 10 + (str[count] - '0');
-                    ++count;
+                else if (text[n] == '+') {
+                    ++n;
                 }
 
-                if (exMinus) {
+                ex = text[n] - '0';
+                ++n;
+
+                while (isdigit(text[n])) {
+                    ex = ex * 10 + (text[n] - '0');
+                    ++n;
+                }
+
+                if (Minus) {
                     ex *= -1;
                 }
 
@@ -81,13 +82,13 @@ int main() {
                 buff *= -1;
             }
 
-            sum += buff;
+            summa += buff;
         }
 
-        ++count;
+        ++n;
     }
 
-    std::cout << "\nSum: " << sum;
+    std::cout << "\nSum: " << summa;
 
     return 0;
 }
