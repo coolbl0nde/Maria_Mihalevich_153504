@@ -32,13 +32,10 @@ int main() {
 int findWordAmount(int& m, int& L, std::string s1, std::string s2) {
 	int  firstPref = 0, amount = 0;
 
-	for (int i = 0; i < s1.length(); i++)
-	{
+	for (int i = 0; i < s1.length(); i++){
 		if (s1[i] == s2[firstPref]) {
-			for (int j = i; j < s1.length(); j++)
-			{
-				if (s1[j] == s2[firstPref])
-				{
+			for (int j = i; j < s1.length(); j++){
+				if (s1[j] == s2[firstPref]){
 					++firstPref;
 				}
 				else {
@@ -63,8 +60,7 @@ int findWordAmount(int& m, int& L, std::string s1, std::string s2) {
 
 int inputInt(int min, int max) {
 	int x;
-	while (true)
-	{
+	while (true){
 		std::cin >> x;
 
 		if (x < max && x > min)
