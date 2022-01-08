@@ -1,4 +1,6 @@
-﻿#include <iostream>
+﻿//Лабораторная 7, задача 10. Выполнила Михалевич М.П.
+
+#include <iostream>
 
 int f(int time, int n);
 

@@ -1,4 +1,5 @@
-﻿/* Вчера на уроке математики Саша (возможно Богом данный) узнал о том,
+﻿//Лабораторная 7, задача 9. Выполнила Михалевич М.П.
+/* Вчера на уроке математики Саша (возможно Богом данный) узнал о том,
 что иногда полезно использовать  вместо десятичной системы счисления какую-нибудь другую.
 Однако, учительница (как иронично) не объяснила, почему в системе счисления по основанию b в
 качестве цифр выбирают числа от 0 до b - 1. Немного подумав, Саша понял, что можно выбирать
@@ -10,90 +11,110 @@
 
 #include <iostream>
 #include <string>
-using namespace std;
 
 bool MINUS;
 
-void convert3(int a, string& Digit) {
-	if (a / 3) convert3(a / 3, Digit);
-	string temp = to_string(a % 3);
-	Digit.push_back(temp[0]);
+void toTernary(int a, std::string& str);
+void newToTernary(std::string str1, std::string& str, int i);
+
+int main() {
+	short n;
+
+	std::string str;
+
+	std::cin >> n;
+
+	if (n < 0) { 
+		n *= -1; 
+		MINUS = 1; 
+	}
+
+	if (n == 0) {
+		std::cout << 0;
+		return (0); 
+	}
+
+	toTernary(n, str);
+
+	std::string str1 = str;
+
+	newToTernary(str1, str, str.length() - 1);
 }
-void convert_new3(string digit3, string& Digit, int i) {
-	string temp3; temp3[0] = digit3[i];
+
+void toTernary(int a, std::string& str) {
+	if (a / 3) toTernary(a / 3, str);
+
+	std::string temp = std::to_string(a % 3);
+
+	str.push_back(temp[0]);
+}
+
+void newToTernary(std::string str1, std::string& str, int i) {
+	std::string temp1; 
+
+	temp1[0] = str1[i];
+
 	short a;
-	if (atoi(temp3.c_str()) < 1) {
-		string temp = to_string(atoi(temp3.c_str()) + 3);
-		Digit[i] = temp[0];
+	if (atoi(temp1.c_str()) < 1) {
+		std::string temp = std::to_string(atoi(temp1.c_str()) + 3);
+		str[i] = temp[0];
 		if (i == 0) {
-			string newDigit; 
-			newDigit.resize(Digit.length() + 1);
-			newDigit[0] = '2';
-			for (short j = 0, k = 1; j < Digit.length(); ++j, ++k) newDigit[k] = Digit[j];
-			cout << newDigit; 
+			std::string newStr;
+
+			newStr.resize(str.length() + 1);
+			newStr[0] = '2';
+
+			for (short j = 0, k = 1; j < str.length(); ++j, ++k) newStr[k] = str[j];
+
+			std::cout << newStr;
 			return;
 		}
-		temp[0] = digit3[i - 1];
+
+		temp[0] = str1[i - 1];
 		a = atoi(temp.c_str()) - 1;
+
 		if (a >= 0) {
 			temp.erase(0, 1);
-			string y = to_string(a);
+
+			std::string y = std::to_string(a);
+
 			temp.push_back(y[0]);
-			digit3[i - 1] = temp[0];
+
+			str1[i - 1] = temp[0];
 		}
 		else {
 			bool zero = 0;
+
 			a += 3;
+
 			temp.erase(0, 1);
-			string y = to_string(a);
+			std::string y = std::to_string(a);
 			temp.push_back(y[0]);
-			if (digit3[i - 1] == '0') zero = 1;
-			digit3[i - 1] = temp[0];
+
+			if (str1[i - 1] == '0') zero = 1;
+
+			str1[i - 1] = temp[0];
+
 			if (zero) {
-				temp[0] = digit3[i - 2];
+				temp[0] = str1[i - 2];
 				a = atoi(temp.c_str()) - 1;
-				temp = to_string(a);
-				digit3[i - 2] = temp[0];
+				temp = std::to_string(a);
+				str1[i - 2] = temp[0];
 			}
 		}
 	}
-	else Digit[i] = digit3[i];
-	if (i - 1 == 0 && digit3[i - 1] == '0') {
+	else str[i] = str1[i];
+
+	if (i - 1 == 0 && str1[i - 1] == '0') {
 		if (MINUS) putchar('-');
-		Digit.erase(0, 1); 
-		cout << Digit;
+		str.erase(0, 1);
+		std::cout << str;
 		return;
 	}
 	if (i == 0) {
-		if (MINUS) putchar('-'); cout << Digit;
+		if (MINUS) putchar('-');
+		std::cout << str;
 		return;
 	}
-	return convert_new3(digit3, Digit, --i);
+	return newToTernary(str1, str, --i);
 }
-
-int main() {
-	short digit; string Digit; cin >> digit;
-	if (digit < 0) { digit *= -1; MINUS = 1; }
-	if (digit == 0) { 
-		cout << 0; 
-		return (0); 
-	}
-	convert3(digit, Digit);
-	string digit3 = Digit;
-	convert_new3(digit3, Digit, Digit.length() - 1);
-}
-
-/*
-
-99 - 3123
-10200
-
-150 - 12113
-12120
-
-237 - 22133
-22210
-
-21 - 133
-
-*/

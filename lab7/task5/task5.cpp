@@ -1,4 +1,6 @@
-﻿#include <iostream>
+﻿//Лабораторная 7, задача 5. Выполнила Михалевич М.П.
+
+#include <iostream>
 #include <string>
 
 std::string f(int a);
@@ -14,12 +16,16 @@ int main(){
 }
 
 std::string f(int a) {
+
 	std::string str;
 	std::string* str1 = new std::string[]{ "","I","II","III","IV","V","VI","VII","VIII","IX" };
+
 	for (int i = 0; i < a / 1000; i++){
 		str += "M";
 	}
+
 	a %= 1000;
+
 	if ((a % 500) / 100 + 5 == 9){
 		str += "CM";
 		a %= 900;
@@ -50,6 +56,8 @@ std::string f(int a) {
 		str += "X";
 	}
 	a %= 10;
+
 	str += str1[a];
+
 	return str;
 }

@@ -1,34 +1,26 @@
-﻿#include <iostream>
-#include <string>
-using namespace std;
+﻿//Лабораторная 7, задача 8. Выполнила Михалевич М.П.
 
-void to_binary(int a, string& s) {
-	int mx = 0;
-	while ((a >> mx++) > 1);
-	int num = a, bin;
-	while (mx > 0) {
-		bin = pow(2, --mx);
-		if (num < bin) s += '0';
-		else {
-			s += '1';
-			num -= bin;
-		}
-	}
-}
+#include <iostream>
+#include <string>
+
+void tobinary(int a, std::string& str);
 
 int main() {
 
-	short ourDigit = 0, n; cin >> n;
+	short Digit = 0, n; 
+	std::cin >> n;
 
-	string a = "10", b = "8", c = "1", d = "100", e = "1000";
+	std::string a = "10", b = "8", c = "1", d = "100", e = "1000";
 
 	for (short i = 1; i <= 10000; ++i) {
 
-		string digit = to_string(i);
+		std::string digit = std::to_string(i);
 
 		bool same = 0;
 
-		string binary; to_binary(i, binary);
+		std::string binary; 
+		
+		tobinary(i, binary);
 
 		for (short j = 0; binary != digit; ++j) {
 			if (binary.length() == 0) break;
@@ -36,13 +28,18 @@ int main() {
 		}
 
 		if (binary.length()) same = 1;
-		if (same) ++ourDigit; if (ourDigit == n) { cout << i; break; }
+		if (same) ++Digit;
+		if (Digit == n) {
+			std::cout << i;
+			break;
+		}
 
 		short A = atoi(a.c_str());
 		short B = atoi(b.c_str());
 		short C = atoi(c.c_str());
 		short D = atoi(d.c_str());
 		short E = atoi(e.c_str());
+
 		if (i % A == C) {
 			i += B;
 			a += "0";
@@ -60,4 +57,22 @@ int main() {
 		}
 	}
 	return (0);
+}
+
+void tobinary(int a, std::string& str) {
+	int n = 0;
+
+	while ((a >> n++) > 1);
+
+	int num = a, bin;
+
+	while (n > 0) {
+		bin = pow(2, --n);
+
+		if (num < bin) str += '0';
+		else {
+			str += '1';
+			num -= bin;
+		}
+	}
 }

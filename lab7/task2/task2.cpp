@@ -1,4 +1,6 @@
-﻿#include <iostream>
+﻿//Лабораторная 7, задача 2. Выполнила Михалевич М.П. Вариант 13
+
+#include <iostream>
 #include <string>
 
 std::string f(std::string s);
