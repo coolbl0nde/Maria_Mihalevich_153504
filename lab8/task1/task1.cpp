@@ -55,41 +55,41 @@ int main() {
 	int size = 0, size1 = 0;
 
 	do {
-		int sw;
+		int n;
 		cout << "Выберите действие(1 - создать массив структур, 2 - просмотреть данные,3 - найти по элементу,4 - сортировать(по убыванию), 5 - удалить/изменить, 6 - очистить консоль, 0 - выход): ";
 
-		while (!(cin >> sw) || sw > 6) {
+		while (!(cin >> n) || n > 6) {
 			cout << "Введите корректное значение: ";
 			cin.clear();
 			cin.ignore(1000, '\n');
 		}
 
-		if (sw == 1) {
+		if (n == 1) {
 			printf("Введите размер массива: ");
 			scanf_s("%d", &size1);
 			stations = AddStruct(stations, size, size1);
 			SetData(stations, size, size1);
 			size = size1;
 		}
-		else if (sw == 2) {
+		else if (n == 2) {
 			ShowData(stations, size1);
 		}
-		else if (sw == 3) {
+		else if (n == 3) {
 			if (stations != 0)
 				FindData(stations, size1);
 		}
-		else if (sw == 4) {
+		else if (n == 4) {
 			if (stations != 0)
 				insertSort(stations, size1);
 		}
-		else if (sw == 5) {
+		else if (n == 5) {
 			if (stations != 0)
 				stations = DeleteStruct(stations, size1);
 		}
-		else if (sw == 6) {
+		else if (n == 6) {
 			system("cls");
 		}
-		else if (sw == 0) {
+		else if (n == 0) {
 			break;
 		}
 	} while (true);
@@ -103,12 +103,12 @@ station* AddStruct(station* Obj, int& size, int& size1) { // освободит�
 		Obj = new station[size1];
 	}
 	else {
-		station* temp_Obj = new station[size1];
+		station* newObj = new station[size1];
 		for (int i = 0; i < size; i++) {
-			temp_Obj[i] = Obj[i];
+			newObj[i] = Obj[i];
 		}
 		delete[] Obj;
-		Obj = temp_Obj;
+		Obj = newObj;
 	}
 	return Obj;
 }
@@ -283,10 +283,10 @@ station* DeleteStruct(station* Obj, int& size1) { // удаление/измен
 			cin.ignore(10000, '\n');
 		}
 		int j = 0;
-		station* temp_Obj = new station[size1 - 1];
+		station* newObj = new station[size1 - 1];
 		for (int i = 0; i < size1; i++) {
 			if (i != m - 1) {
-				temp_Obj[j] = Obj[i];
+				newObj[j] = Obj[i];
 				j++;
 			}
 			else
@@ -294,7 +294,7 @@ station* DeleteStruct(station* Obj, int& size1) { // удаление/измен
 		}
 		size1--;
 		delete[] Obj;
-		Obj = temp_Obj;
+		Obj = newObj;
 	}
 	else if (k == 2) {
 		int m;

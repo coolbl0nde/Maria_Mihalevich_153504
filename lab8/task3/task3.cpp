@@ -184,22 +184,22 @@ public:
 	}
 	void delete_s(factory*& ceh, int& m) {
 		int d;
-		char da[100];
+		char str[100];
 		bool r = 0;
 		clear_m();
 		printf("\nНаименование продукции для удаления (0=назад): ");
-		std::cin.get(da, 100);
-		while (da[0] == '\0') {
+		std::cin.get(str, 100);
+		while (str[0] == '\0') {
 			clear_m();
 			printf("Введите корректное значение: ");
-			std::cin.get(da, 100);
+			std::cin.get(str, 100);
 		}
-		if (da[0] == '0' && da[1] == '\0') {
+		if (str[0] == '0' && str[1] == '\0') {
 			return;
 		}
 		int h;
 		for (h = 0; h < m; h++) {
-			if (ceh[h].name[0] == da[0]) {
+			if (ceh[h].name[0] == str[0]) {
 				r = 1;
 				d = h;
 				break;
@@ -210,8 +210,8 @@ public:
 			return;
 		}
 		for (int j = 0; j < 100; j++) {
-			if (ceh[h].name[j] == '\0' && da[j] == '\0') break;
-			if (ceh[h].name[j] == da[j]) continue;
+			if (ceh[h].name[j] == '\0' && str[j] == '\0') break;
+			if (ceh[h].name[j] == str[j]) continue;
 			else {
 				printf("В списке нет такой продукции");
 				return;
